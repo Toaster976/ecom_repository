@@ -65,7 +65,17 @@ public class ecom_productslist extends HttpServlet {
                 out2.print("<td>"+records.getString("description")+"</td>");
                 out2.print("<td>"+"$"+records.getString("price")+"</td>");
                 out2.print("<td>"+records.getString("pid")+"</td>");
-                out2.print("</tr>");
+        		out2.println("<form action='ecom_productPage.jsp' method='post'>");
+        		//out2.println("<td></td>");
+        		out2.println("<input type='hidden' name='product_id' value='"+records.getString("pid")+"'/>");
+        		out2.println("<input type='hidden' name='product_name' value='"+ records.getString("name") +"'/>");
+        		out2.println("<input type='hidden' name='product_description' value='"+records.getString("description")+"'/>");
+        		out2.println("<input type='hidden' name='image' value='"+ records.getString("image") +"'/>");
+        		out2.println("<input type='hidden' name='product_price' value='"+records.getString("price")+"'/>");
+        		out2.println("<input type='hidden' name='qty_order' value='1'/>");
+        		out2.println("<td>"+"<button>Buy now</button>"+"</td>");
+        		out2.println("</tr>");
+        		out2.println("</form>");
             }
             out2.print("</table>");
         }
@@ -73,7 +83,7 @@ public class ecom_productslist extends HttpServlet {
         
         
         catch(Exception e) {e.printStackTrace();}
-	}
+}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
