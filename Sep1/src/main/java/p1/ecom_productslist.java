@@ -72,7 +72,7 @@ public class ecom_productslist extends HttpServlet {
         		out2.println("<input type='hidden' name='product_description' value='"+records.getString("description")+"'/>");
         		out2.println("<input type='hidden' name='image' value='"+ records.getString("image") +"'/>");
         		out2.println("<input type='hidden' name='product_price' value='"+records.getString("price")+"'/>");
-        		out2.println("<input type='hidden' name='qty_order' value='1'/>");
+        		out2.println("<input type='hidden' name='qty' value='1'/>");
         		out2.println("<td>"+"<button>Buy now</button>"+"</td>");
         		out2.println("</tr>");
         		out2.println("</form>");
