@@ -38,16 +38,17 @@ public class ecom_addToCart extends HttpServlet {
 	     }
 	     String name, desc, image, id;
 	     float price;
-	     int qty;
+	     int qty, qty_available;
 	     id=request.getParameter("product_id");
 	     name=request.getParameter("product_name");
 	     desc=request.getParameter("product_description");
 	     image=request.getParameter("image");
 	     price=Float.parseFloat(request.getParameter("product_price"));
 	     qty=Integer.parseInt(request.getParameter("qty"));
+	     qty_available=Integer.parseInt(request.getParameter("product_qty_available"));
 	     
 	     
-	     row Item=new row(id, name, desc, image, qty, price);
+	     row Item=new row(id, name, desc, image, qty, price, qty_available);
 	     shopCart.add(Item);
 	     session.setAttribute("sCart", shopCart);
 	     RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("/ecom_showCart");
