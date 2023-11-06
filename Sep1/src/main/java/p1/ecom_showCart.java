@@ -54,7 +54,7 @@ private static final long serialVersionUID = 1L;
 	        out2.println("<button>Enter Customer Info</button>");
 	        out2.println("</form>");
 	        
-	        if ((String)session.getAttribute("cName") != null) {
+	        if ((String)session.getAttribute("cID") != null) {
 	        	out2.println("<form action=\"ecom_checkout\" >");
 		        out2.println("<button>Checkout Cart</button>");
 		        out2.println("</form>");

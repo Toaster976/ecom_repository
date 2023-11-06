@@ -36,6 +36,7 @@ public class ecom_addCustomerInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 // TODO Auto-generated method stub
 		 HttpSession session=request.getSession();
+		 session.setAttribute("cID", request.getParameter("customer_ID"));
 		 doPost(request, response);
 		
 		 String name, address, email, cardID;
