@@ -42,13 +42,6 @@ private static final long serialVersionUID = 1L;
         out2.print("<h2 style=\"text-align:center\">" + "Shopping Cart" + "</h2>");
         
         out2.println("<div class=\"center\">");
-        out2.println("<form action=\"ecom_home.html\" >");
-        out2.println("<button>Return Home</button>");
-        out2.println("</form>");
-    	
-        out2.println("<form action=\"ecom_productslist\" >");
-        out2.println("<p><button>Return to Product List</button></p>");
-        out2.println("</form>");
 		
 		HttpSession session=request.getSession();
 		ArrayList<row> shopCart=(ArrayList)session.getAttribute("sCart");
@@ -57,29 +50,46 @@ private static final long serialVersionUID = 1L;
 			out2.println("<p>Empty Shop Cart!</p>");
 		else
 		{
+			out2.println("<form action=\"ecom_customerInfo.jsp\" >");
+	        out2.println("<button>Enter Customer Info</button>");
+	        out2.println("</form>");
+	        
+	        if ((String)session.getAttribute("cName") != null) {
+	        	out2.println("<form action=\"ecom_checkout\" >");
+		        out2.println("<button>Checkout Cart</button>");
+		        out2.println("</form>");
+	        }
+	        
 			out2.println("<table border='1' width='100%' cellpadding='6'>");
 			out2.println("<tr>");
-			out2.println("<th>&nbsp</th>");
-			out2.println("<th>Product ID</th>");
-			out2.println("<th>Picture</th>");
+			//out2.println("<th>&nbsp</th>");
+			//out2.println("<th>Product ID</th>");
 			out2.println("<th>Product Name</th>");
+			out2.println("<th>Picture</th>");
 			out2.println("<th>Product Description</th>");
 			out2.println("<th>Price</th>");
 			out2.println("<th>Quantity</th>");
 			out2.println("</tr>");
 			for(row r:shopCart) {
 				out2.println("<tr>");
-				out2.println("<td>"+"</td>");
-				out2.println("<td>"+r.get_product_id()+"</td>");
-				out2.println("<td>"+"<img src=\"" + r.get_image() + "\" style=\"width:200px\">"+"</td>");
 				out2.println("<td>"+r.get_product_name()+"</td>");
+				out2.println("<td>"+"<img src=\"" + r.get_image() + "\" style=\"width:200px\">"+"</td>");
 				out2.println("<td>"+r.get_product_desc()+"</td>");
-				out2.println("<td>"+r.get_product_price()+"</td>");
+				out2.println("<td>"+"$"+r.get_product_price()+"</td>");
 				out2.println("<td>"+r.get_qty()+"</td>");
 				out2.println("</tr>");
 			}
 		}
 		out2.println("</table><br />");
+		
+		out2.println("<form action=\"ecom_home.html\" >");
+        out2.println("<button>Return Home</button>");
+        out2.println("</form>");
+    	
+        out2.println("<form action=\"ecom_productslist\" >");
+        out2.println("<p><button>Return to Product List</button></p>");
+        out2.println("</form>");
+        
 		out2.println("</div>");
 		
 	}

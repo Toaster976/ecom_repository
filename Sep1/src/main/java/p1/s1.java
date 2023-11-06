@@ -28,7 +28,7 @@ public class s1 extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		Cookie c=new Cookie("user","Aidan");
+		Cookie c=new Cookie("user","Quentin");
 		c.setMaxAge(60*60*48);
 		response.addCookie(c);
 		out.println("<html><body><form action='s2'><button>Servlet 2</button></form></body></html>");
