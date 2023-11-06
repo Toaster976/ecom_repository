@@ -29,17 +29,27 @@ private static final long serialVersionUID = 1L;
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		PrintWriter out2=response.getWriter();
-		out2.println("<html><head><title>Shopping Cart</title></head><body>");
-		out2.println("<table border='1' width='100%' cellpadding='6'>");
-		out2.println("<tr>");
-		out2.println("<th>&nbsp</th>");
-		out2.println("<th>Product ID</th>");
-		out2.println("<th>Picture</th>");
-		out2.println("<th>Product Name</th>");
-		out2.println("<th>Product Description</th>");
-		out2.println("<th>Price</th>");
-		out2.println("<th>Quantity</th>");
-		out2.println("</tr>");
+		out2.println("<html><head><title>Shopping Cart</title></head><style>\r\n"
+        		+ ".center {\r\n"
+        		+ "position: relative;\r\n"
+        		+ "text-align: center;\r\n"
+        		+ "margin-left: auto\r\n"
+        		+ "margin-right: auto;\r\n"
+        		+ "}\r\n"
+        		+ "</style><body>");
+		
+		out2.print("<h1 style=\"text-align:center\">" + "CoinCrafters Tech" + "</h1>");
+        out2.print("<h2 style=\"text-align:center\">" + "Shopping Cart" + "</h2>");
+        
+        out2.println("<div class=\"center\">");
+        out2.println("<form action=\"ecom_home.html\" >");
+        out2.println("<button>Return Home</button>");
+        out2.println("</form>");
+    	
+        out2.println("<form action=\"ecom_productslist\" >");
+        out2.println("<p><button>Return to Product List</button></p>");
+        out2.println("</form>");
+		
 		HttpSession session=request.getSession();
 		ArrayList<row> shopCart=(ArrayList)session.getAttribute("sCart");
 		
@@ -47,6 +57,16 @@ private static final long serialVersionUID = 1L;
 			out2.println("<p>Empty Shop Cart!</p>");
 		else
 		{
+			out2.println("<table border='1' width='100%' cellpadding='6'>");
+			out2.println("<tr>");
+			out2.println("<th>&nbsp</th>");
+			out2.println("<th>Product ID</th>");
+			out2.println("<th>Picture</th>");
+			out2.println("<th>Product Name</th>");
+			out2.println("<th>Product Description</th>");
+			out2.println("<th>Price</th>");
+			out2.println("<th>Quantity</th>");
+			out2.println("</tr>");
 			for(row r:shopCart) {
 				out2.println("<tr>");
 				out2.println("<td>"+"</td>");
@@ -60,6 +80,8 @@ private static final long serialVersionUID = 1L;
 			}
 		}
 		out2.println("</table><br />");
+		out2.println("</div>");
+		
 	}
 	/**
 	* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

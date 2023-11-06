@@ -58,8 +58,8 @@ public class ecom_productslist extends HttpServlet {
             out2.print("<h2 style=\"text-align:center\">" + "Products List" + "</h2>");
             
             out2.println("<div class=\"center\">");
-            out2.println("<form action=\"ecom_productslist\" >");
-            out2.println("<button>Product List</button>");
+            out2.println("<form action=\"ecom_home.html\" >");
+            out2.println("<button>Return Home</button>");
             out2.println("</form>");
 	    	
             out2.println("<form action=\"ecom_showCart\" >");
