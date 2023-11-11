@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -36,7 +38,6 @@ public class ecom_addCustomerInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 // TODO Auto-generated method stub
 		 HttpSession session=request.getSession();
-		 session.setAttribute("cID", request.getParameter("customer_ID"));
 		 doPost(request, response);
 		
 		 String name, address, email, cardID;
@@ -65,7 +66,11 @@ public class ecom_addCustomerInfo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session=request.getSession();
 		Connection mycon=null;
+        Statement sql_stmt=null;
+        ResultSet customers=null;
+        int customer_ID = 1;
 		//ResultSet records=null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -73,9 +78,17 @@ public class ecom_addCustomerInfo extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter out=response.getWriter();
 			
+			sql_stmt = mycon.createStatement();  
+            customers = sql_stmt.executeQuery("select * from customers");
+            
+            while (customers.next()) {
+            	customer_ID++;
+            }
+            
+            session.setAttribute("cID", customer_ID);
 			
 			PreparedStatement preSqlStmt=mycon.prepareStatement("Insert into customers values(?,?,?,?,?)");
-			preSqlStmt.setInt(1,Integer.parseInt(request.getParameter("customer_ID"))); //preSqlStmt.setInt(1,orderNo);
+			preSqlStmt.setInt(1,customer_ID); //preSqlStmt.setInt(1,orderNo);
 			preSqlStmt.setString(2,request.getParameter("customer_name"));
 			preSqlStmt.setString(3,request.getParameter("customer_email"));
 			preSqlStmt.setString(4,request.getParameter("customer_address"));

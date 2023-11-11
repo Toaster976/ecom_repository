@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -36,6 +38,9 @@ public class ecom_checkout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
+		
+		RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("ecom_home.html");
+	    RequetsDispatcherObj.forward(request, response);
 	}
 
 	/**
@@ -45,6 +50,9 @@ public class ecom_checkout extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
 		Connection mycon=null;
+		Statement sql_stmt=null;
+        ResultSet orders=null;
+        int order_ID = 1;
 		ArrayList<row> shopCart=(ArrayList)session.getAttribute("sCart");
 		
 		String product_ID_string = new String("");
@@ -65,16 +73,26 @@ public class ecom_checkout extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter out=response.getWriter();
 			
+			sql_stmt = mycon.createStatement();  
+            orders = sql_stmt.executeQuery("select * from orders");
+            
+            while (orders.next()) {
+            	order_ID++;
+            }
 			
-			PreparedStatement preSqlStmt=mycon.prepareStatement("Insert into orders values(?,?,?)");
-			preSqlStmt.setInt(1,Integer.parseInt((String)session.getAttribute("cID"))); //preSqlStmt.setInt(1,orderNo);
-			preSqlStmt.setString(2,product_ID_string);
-			preSqlStmt.setString(3,product_qty_string);
+			
+			PreparedStatement preSqlStmt=mycon.prepareStatement("Insert into orders values(?,?,?,?,?)");
+			preSqlStmt.setInt(1,order_ID);
+			preSqlStmt.setInt(2,Integer.parseInt((String)session.getAttribute("cID"))); //preSqlStmt.setInt(1,orderNo);
+			preSqlStmt.setString(3,product_ID_string);
+			preSqlStmt.setString(4,product_qty_string);
+			preSqlStmt.setString(5,"ordered");
 			
 			int x=preSqlStmt.executeUpdate();
 			mycon.close();
 			if(x>0)
 			{
+				out.println("works");
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/ecom_home.html");
 				rd.forward(request, response);
 			}

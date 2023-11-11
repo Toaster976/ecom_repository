@@ -21,9 +21,6 @@
 		<h2 style="text-align:center">Please enter customer information:</h2>
 	
 		<form action="ecom_addCustomerInfo">
-			<h3>Customer ID:</h3>
-			<input type='text' name='customer_ID'/>
-			</br>
 			<h3>Name:</h3>
 			<input type='text' name='customer_name'/>
 			</br>
