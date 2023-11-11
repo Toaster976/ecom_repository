@@ -38,9 +38,7 @@ public class ecom_checkout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
-		
-		RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("ecom_home.html");
-	    RequetsDispatcherObj.forward(request, response);
+
 	}
 
 	/**
@@ -92,9 +90,13 @@ public class ecom_checkout extends HttpServlet {
 			mycon.close();
 			if(x>0)
 			{
-				out.println("works");
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/ecom_home.html");
-				rd.forward(request, response);
+				out.println("<html><head></head><body>");
+				out.println("Succesfully made order");
+				out.println("<form action='Inventory'>");
+				out.println("<button>Return Home</button>");
+				out.println("</form>");
+				//RequestDispatcher rd = getServletContext().getRequestDispatcher("/ecom_home.html");
+				//rd.forward(request, response);
 			}
 		} catch(Exception e) {e.printStackTrace();} 
 	}
