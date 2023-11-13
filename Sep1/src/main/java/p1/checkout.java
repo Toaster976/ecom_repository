@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ecom_checkout
+ * Servlet implementation class checkout
  */
-@WebServlet("/ecom_checkout")
-public class ecom_checkout extends HttpServlet {
+@WebServlet("/checkout")
+public class checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ecom_checkout() {
+    public checkout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,6 +51,8 @@ public class ecom_checkout extends HttpServlet {
 		Statement sql_stmt=null;
         ResultSet orders=null;
         int order_ID = 1;
+        ResultSet customers=null;
+        int customer_ID = 0;
 		ArrayList<row> shopCart=(ArrayList)session.getAttribute("sCart");
 		
 		String product_ID_string = new String("");
@@ -77,11 +79,18 @@ public class ecom_checkout extends HttpServlet {
             while (orders.next()) {
             	order_ID++;
             }
+            
+            sql_stmt = mycon.createStatement();  
+            customers = sql_stmt.executeQuery("select * from customers");
+            
+            while (customers.next()) {
+            	customer_ID++;
+            }
 			
 			
 			PreparedStatement preSqlStmt=mycon.prepareStatement("Insert into orders values(?,?,?,?,?)");
 			preSqlStmt.setInt(1,order_ID);
-			preSqlStmt.setInt(2,Integer.parseInt((String)session.getAttribute("cID"))); //preSqlStmt.setInt(1,orderNo);
+			preSqlStmt.setInt(2,customer_ID); //preSqlStmt.setInt(1,orderNo);
 			preSqlStmt.setString(3,product_ID_string);
 			preSqlStmt.setString(4,product_qty_string);
 			preSqlStmt.setString(5,"ordered");
@@ -92,7 +101,7 @@ public class ecom_checkout extends HttpServlet {
 			{
 				out.println("<html><head></head><body>");
 				out.println("Succesfully made order");
-				out.println("<form action='Inventory'>");
+				out.println("<form action='home.html'>");
 				out.println("<button>Return Home</button>");
 				out.println("</form>");
 				//RequestDispatcher rd = getServletContext().getRequestDispatcher("/ecom_home.html");

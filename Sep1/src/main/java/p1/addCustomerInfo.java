@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ecom_customerInfo
+ * Servlet implementation class addCustomerInfo
  */
-@WebServlet("/ecom_addCustomerInfo")
-public class ecom_addCustomerInfo extends HttpServlet {
+@WebServlet("/addCustomerInfo")
+public class addCustomerInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ecom_addCustomerInfo() {
+    public addCustomerInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,11 +50,7 @@ public class ecom_addCustomerInfo extends HttpServlet {
 	     //ArrayList customerInfo=(ArrayList)session.getAttribute("cInfo");
 	     //PrintWriter out=response.getWriter();
 	     
-	     //String cName = (String)session.getAttribute("cName");
 	     session.setAttribute("cName", name);
-	     session.setAttribute("cAddress", address);
-	     session.setAttribute("cEmail", email);
-	     session.setAttribute("ccardID", cardID);
 	     
 	     RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("/ecom_showCart");
 	     RequetsDispatcherObj.forward(request, response);
@@ -85,10 +81,9 @@ public class ecom_addCustomerInfo extends HttpServlet {
             	customer_ID++;
             }
             
-            session.setAttribute("cID", customer_ID);
 			
 			PreparedStatement preSqlStmt=mycon.prepareStatement("Insert into customers values(?,?,?,?,?)");
-			preSqlStmt.setInt(1,customer_ID); //preSqlStmt.setInt(1,orderNo);
+			preSqlStmt.setInt(1,customer_ID);
 			preSqlStmt.setString(2,request.getParameter("customer_name"));
 			preSqlStmt.setString(3,request.getParameter("customer_email"));
 			preSqlStmt.setString(4,request.getParameter("customer_address"));
@@ -97,6 +92,8 @@ public class ecom_addCustomerInfo extends HttpServlet {
 			mycon.close();
 			if(x>0)
 			{
+				
+				session.setAttribute("cID", Integer.toString(customer_ID));
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/ecom_showCart");
 				rd.forward(request, response);
 			}

@@ -61,16 +61,52 @@ public class Orders extends HttpServlet {
 		    
 		    //checks if sql orders table is empty, otherwise continue
             if(!records.isBeforeFirst()) {
-            	out2.println("<html><head></head><body style=\"background-color:#99ccff;\">");
-            	out2.println("<p>No orders at the moment!</p><br/><br/>");
+            	out2.println("<html><head>"
+            			+ "<style>\r\n"
+            			+ "		button{\r\n"
+            			+ "            background-color: cornflowerblue;\r\n"
+            			+ "            color: rgb(0, 0, 0);\r\n"
+            			+ "            padding: 10px 20px;\r\n"
+            			+ "            text-decoration: none;\r\n"
+            			+ "            border-radius: 20px;\r\n"
+            			+ "            transition: background-color 0.3s ease;    \r\n"
+            			+ "        }\r\n"
+            			+ "        \r\n"
+            			+ "        button:hover{\r\n"
+            			+ "            background-color: rgb(255, 255, 255);\r\n"
+            			+ "        }\r\n"
+            			+ "</style>"
+            			+ "</head><body style=\"background-color:#99ccff;\">");
+            	out2.println("<div class=\"center\"><p>No orders at the moment!</p><br/><br/>");
             	out2.println("<form action='admin.html'>");
 				out2.println("<button>Back to Admin Menu</button>");
-				out2.println("</form>");
+				out2.println("</form><div>");
             }
             
             else {
-	            out2.println("<html><head><title>Orders</title></head><body style=\"background-color:#99ccff;\">");
-	            out2.print("<h1>" + "Customer Orders" + "</h1>");
+	            out2.println("<html><head><title>Orders</title>"
+	            		+ "<style>\r\n"
+	            		+ ".center {\r\n"
+	            		+ "			position: relative;\r\n"
+	            		+ "			text-align: center;\r\n"
+	            		+ "			margin-left: auto;\r\n"
+	            		+ "			margin-right: auto;\r\n"
+	            		+ "		}"
+	            		+ "		button{\r\n"
+	            		+ "            background-color: cornflowerblue;\r\n"
+	            		+ "            color: rgb(0, 0, 0);\r\n"
+	            		+ "            padding: 10px 20px;\r\n"
+	            		+ "            text-decoration: none;\r\n"
+	            		+ "            border-radius: 20px;\r\n"
+	            		+ "            transition: background-color 0.3s ease;    \r\n"
+	            		+ "        }\r\n"
+	            		+ "        \r\n"
+	            		+ "        button:hover{\r\n"
+	            		+ "            background-color: rgb(255, 255, 255);\r\n"
+	            		+ "        }\r\n"
+	            		+ "</style>"
+	            		+ "</head><body style=\"background-color:#99ccff;\">");
+	            out2.print("<div class=\"center\"><h1>" + "Customer Orders" + "</h1></div>");
 	            out2.println("<table border='1' width='100%' cellpadding='6'>");            
 	            out2.println("<tr>");
 	            out2.println("<th>Customer Info</th>");
@@ -92,10 +128,10 @@ public class Orders extends HttpServlet {
 	            	
 	            	//for sql orders table
 	            	String arr = records.getString("productsOrdered");
-	            	String[] products = arr.split("[,]");
+	            	String[] products = arr.split(",", -1);
 	            	
 	            	String arr2 = records.getString("productQtys");
-	            	String[] quantity = arr2.split("[,]");
+	            	String[] quantity = arr2.split(",", -1);
 
 	            	for (int i = 0; i < products.length; i++) {
 	            		batch2 = "select * from products where pid="+products[i]; //finds the row of information in products by customer id
@@ -114,31 +150,29 @@ public class Orders extends HttpServlet {
 	            	//for customers table to get customer information
 	            	batch1 = "select * from customers where customerID="+records.getString("customerID");
 	            	records2 = sql_stmt2.executeQuery(batch1);
-	            	records2.next();
+	            	while(records2.next()) {
+	            		out2.print("<td>"+"<button>"+"name: "+records2.getString("customerName")+"</button></br></br>");
+		            	out2.println("Customer ID: "+records.getString("customerID")+"</br>");
+		                out2.print("Customer Email: "+records2.getString("customerEmail")+"</td>");
+		                out2.println("<td>"+"Products ordered: "+records.getString("productsOrdered")+"<br/>");
+		                out2.println("<br/>"+"Quantities: "+records.getString("productQtys")+"</td>");
+		                
+		                out2.print("<td>"+records2.getString("customerAddress")+"</td>");
+		                
+		                out2.print("<td>"+records2.getString("customerCardID")+"</td>");
+		                
+		                out2.println("<input type='hidden' name='customerName' value='"+records2.getString("customerName")+"'/>");
+		                out2.println("<input type='hidden' name='email' value='"+ records2.getString("customerEmail")+"'/>");
+		                out2.println("<input type='hidden' name='address' value='"+records2.getString("customerAddress")+"'/>");
+		                out2.println("<input type='hidden' name='cardInfo' value='"+records2.getString("customerCardID")+"'/>");
+	            	}
 	            	
-	            	out2.print("<td>"+"<button>"+"name: "+records2.getString("customerName")+"</button>"+"<br/>"+"<br/>");
-	            	out2.println("Customer ID: "+records.getString("customerID")+"<br/>");
-	                out2.print(records2.getString("customerEmail")+"</td>");
-	            	
-	                
-	            	out2.println("<td>"+"Products ordered: "+records.getString("productsOrdered")+"</p"+"<br/>");
-	                out2.println("<br/>"+"Quantities: "+records.getString("productQtys")+"</td>");
-	                
-	                out2.print("<td>"+records2.getString("customerAddress")+"</td>");
-	                
-	                out2.print("<td>"+records2.getString("customerCardID")+"</td>");
 	                out2.print("</tr>");
 	            	
 	                
 	                out2.println("<input type='hidden' name='id' value='"+records.getString("customerID")+"'/>");
 	                out2.println("<input type='hidden' name='products' value='"+records.getString("productsOrdered")+"'/>");
 	                out2.println("<input type='hidden' name='status' value='"+records.getString("status")+"'/>");
-	                
-	                out2.println("<input type='hidden' name='customerName' value='"+records2.getString("customerName")+"'/>");
-	                out2.println("<input type='hidden' name='email' value='"+ records2.getString("customerEmail")+"'/>");
-	                out2.println("<input type='hidden' name='address' value='"+records2.getString("customerAddress")+"'/>");
-	                out2.println("<input type='hidden' name='cardInfo' value='"+records2.getString("customerCardID")+"'/>");
-	                
 	                
 	                out2.println("</form>");
 	            }
@@ -147,9 +181,9 @@ public class Orders extends HttpServlet {
         out2.print("</table>");
         
         out2.print("<br/><br/>");
-        out2.println("<form action='admin.html'>");
-        out2.println("<button>Back to Admin Menu"); 
-        out2.println("</form>");
+        out2.println("<div class=\"center\"><form action='admin.html'>");
+        out2.println("<button>Back to Admin Menu</button>"); 
+        out2.println("</form></div>");
 		}
         
         

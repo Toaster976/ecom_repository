@@ -12,6 +12,18 @@
 		margin-left: auto;
 		margin-right: auto;
 		}
+		button{
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;    
+        }
+        
+        button:hover{
+            background-color: cornflowerblue;
+        }
 		</style>
 	</head>
 	<body>
@@ -31,10 +43,11 @@
 			<input type='hidden' name='image' value='<%=request.getParameter("image")%>'/>
 			<input type='hidden' name='product_price' value='<%=request.getParameter("product_price")%>'/>
 			<input type='hidden' name='product_qty_available' value='<%=request.getParameter("product_qty_available")%>'/>
-			<input type='text' name='qty' value='1'/>
+			<label>Enter order quantity: </label><input type='text' name='qty' value='1'/>
+			<br><br>
 			<button>Add to Cart</button>
 		</form>
-		
+		<br>
 		<form action="ecom_productslist" >
 			<button>Return to Product List</button>
 		</form>

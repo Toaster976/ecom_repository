@@ -36,6 +36,18 @@ private static final long serialVersionUID = 1L;
         		+ "margin-left: auto\r\n"
         		+ "margin-right: auto;\r\n"
         		+ "}\r\n"
+        		+ "button{\r\n"
+        		+ "            background-color: rgb(255, 255, 255);\r\n"
+        		+ "            color: rgb(0, 0, 0);\r\n"
+        		+ "            padding: 10px 20px;\r\n"
+        		+ "            text-decoration: none;\r\n"
+        		+ "            border-radius: 20px;\r\n"
+        		+ "            transition: background-color 0.3s ease;    \r\n"
+        		+ "        }\r\n"
+        		+ "        \r\n"
+        		+ "        button:hover{\r\n"
+        		+ "            background-color: cornflowerblue;\r\n"
+        		+ "        }"
         		+ "</style><body>");
 		
 		out2.print("<h1 style=\"text-align:center\">" + "CoinCrafters Tech" + "</h1>");
@@ -55,7 +67,7 @@ private static final long serialVersionUID = 1L;
 	        out2.println("</form>");
 	        
 	        if ((String)session.getAttribute("cName") != null) {
-	        	out2.println("<form action=\"ecom_checkout\" >");
+	        	out2.println("<form action=\"checkout\" >");
 		        out2.println("<button>Checkout Cart</button>");
 		        out2.println("</form>");
 	        }
@@ -82,7 +94,7 @@ private static final long serialVersionUID = 1L;
 		}
 		out2.println("</table><br />");
 		
-		out2.println("<form action=\"ecom_home.html\" >");
+		out2.println("<form action=\"home.html\" >");
         out2.println("<button>Return Home</button>");
         out2.println("</form>");
     	

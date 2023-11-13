@@ -45,8 +45,29 @@ public class Inventory extends HttpServlet {
             sql_stmt = mycon.createStatement();  
             records = sql_stmt.executeQuery("select * from products");
             
-            out2.println("<html><head><title>Product List</title></head><body style=\"background-color:#99ccff;\">");
-            out2.print("<h1>" + "Edit Coins" + "</h1>");
+            out2.println("<html><head><title>Product List</title>"
+            		+ "<style>\r\n"
+            		+ ".center {\r\n"
+            		+ "			position: relative;\r\n"
+            		+ "			text-align: center;\r\n"
+            		+ "			margin-left: auto;\r\n"
+            		+ "			margin-right: auto;\r\n"
+            		+ "		}"
+            		+ "		button{\r\n"
+            		+ "            background-color: cornflowerblue;\r\n"
+            		+ "            color: rgb(0, 0, 0);\r\n"
+            		+ "            padding: 10px 20px;\r\n"
+            		+ "            text-decoration: none;\r\n"
+            		+ "            border-radius: 20px;\r\n"
+            		+ "            transition: background-color 0.3s ease;    \r\n"
+            		+ "        }\r\n"
+            		+ "        \r\n"
+            		+ "        button:hover{\r\n"
+            		+ "            background-color: rgb(255, 255, 255);\r\n"
+            		+ "        }\r\n"
+            		+ "</style>"
+            		+ "</head><body style=\"background-color:#99ccff;\">");
+            out2.print("<div class=\"center\"><h1>" + "Edit Coins" + "</h1></div>");
             out2.println("<table border='0' width='100%' cellpadding='6'>");
             
             out2.println("<tr>");
@@ -90,9 +111,9 @@ public class Inventory extends HttpServlet {
             out2.print("</table>");
             
             out2.print("<br/><br/>");
-            out2.println("<form action='admin.html'>");
+            out2.println("<div class=\"center\"><form action='admin.html'>");
             out2.println("<button>Back to Admin Menu"); 
-            out2.println("</form>");
+            out2.println("</form></div>");
            
         }
         

@@ -52,13 +52,25 @@ public class ecom_productslist extends HttpServlet {
             		+ "margin-left: auto\r\n"
             		+ "margin-right: auto;\r\n"
             		+ "}\r\n"
+            		+ "button{\r\n"
+            		+ "            background-color: rgb(255, 255, 255);\r\n"
+            		+ "            color: rgb(0, 0, 0);\r\n"
+            		+ "            padding: 10px 20px;\r\n"
+            		+ "            text-decoration: none;\r\n"
+            		+ "            border-radius: 20px;\r\n"
+            		+ "            transition: background-color 0.3s ease;    \r\n"
+            		+ "        }\r\n"
+            		+ "        \r\n"
+            		+ "        button:hover{\r\n"
+            		+ "            background-color: cornflowerblue;\r\n"
+            		+ "        }"
             		+ "</style><body>");
             
             out2.print("<h1 style=\"text-align:center\">" + "CoinCrafters Tech" + "</h1>");
             out2.print("<h2 style=\"text-align:center\">" + "Products List" + "</h2>");
             
             out2.println("<div class=\"center\">");
-            out2.println("<form action=\"ecom_home.html\" >");
+            out2.println("<form action=\"home.html\" >");
             out2.println("<button>Return Home</button>");
             out2.println("</form>");
 	    	

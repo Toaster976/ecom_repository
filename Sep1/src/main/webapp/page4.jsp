@@ -5,9 +5,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Customer order</title>
+<style>
+		.center {
+			position: relative;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		button{
+            background-color: cornflowerblue;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;    
+        }
+        
+        button:hover{
+            background-color: rgb(255, 255, 255);
+        }
+</style>
 </head>
 <body style="background-color:#99ccff;">
-
+	<div class="center">
+	
 	<h4 style="font-size:20pt; font-family:Sans-serif;">${param.customerName}</h4>
 	<b>Customer ID: </b><%=request.getParameter("id") %><br>
 	<b>Card Info: </b><%=request.getParameter("cardInfo") %><br><br>
@@ -54,5 +75,6 @@
 		<button>Update status to Delivered</button>
 	</form>
 	
+	</div>
 </body>
 </html>

@@ -5,8 +5,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Editing Coin</title>
+<style>
+		.center {
+			position: relative;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		button{
+            background-color: cornflowerblue;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;    
+        }
+        
+        button:hover{
+            background-color: rgb(255, 255, 255);
+        }
+</style>
 </head>
 <body style="background-color:#99ccff;">
+	<div class="center">
 	<h4 style="font-size:20pt; font-family:Sans-serif;">${param.coinName}</h4>
 	<h6 style="font-size:13pt; font-family:Sans-serif;">${param.coinDesc}</h6>
 	<%
@@ -41,6 +62,6 @@
 		<input type='hidden' name='pid' value='<%=request.getParameter("pid") %>'/> <br/>
 		<button>Delete Coin</button>
 	</form>
-	
+	</div>
 </body>
 </html>
