@@ -44,9 +44,12 @@
 		Image <br/>
 		<input type='file' name='pic' accept='image/png, image/jpeg, image/jpg'/>  <br/><br/>
 		
-		price <br/>
+		Price <br/>
 		<input type='number' name='customerPrice' placeholder='e.g. 10000'/>  <br/><br/>
-		
+
+		Quantity <br/>
+		<input type='number' name='qty' placeholder='e.g. 10'/>  <br/><br/>
+
 		<input type='hidden' name='edit' value='add'>
 		<button>add coin</button>
 		</h2>
