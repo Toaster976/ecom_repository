@@ -48,7 +48,10 @@
 		
 		price<br/>
 		<input type='number' name='customerPrice' value='<%=request.getParameter("customerPrice")%>'/> <br/>
-		
+
+		Quantity<br/>
+		<input type='number' name='qty' value='<%=request.getParameter("qty")%>'/> <br/>
+
 		<input type='hidden' name='edit' value='modify'> <br/> <br/> 
 		<button>update coin</button>
 		</h2>
