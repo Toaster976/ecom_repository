@@ -41,7 +41,7 @@ public class Inventory extends HttpServlet {
         ResultSet records=null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","Iforgot#6");
+            mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","$Edg131854");
             sql_stmt = mycon.createStatement();  
             records = sql_stmt.executeQuery("select * from products");
             
@@ -76,6 +76,7 @@ public class Inventory extends HttpServlet {
             out2.println("<th>Product Description</th>");
             out2.println("<th>Price</th>");
             out2.println("<th>Product ID</th>");
+            out2.println("<th>Quantity</th>");
             
             
             //for adding new coin
@@ -95,6 +96,7 @@ public class Inventory extends HttpServlet {
                 out2.print("<td>"+records.getString("description")+"</td>");
                 out2.print("<td>"+"$"+records.getString("price")+"</td>");
                 out2.print("<td>"+records.getString("pid")+"</td>");
+                out2.print("<td>"+records.getString("qty_available")+"</td>");
                 out2.print("</tr>");
                 
                 out2.println("<input type='hidden' name='pid' value='"+records.getString("pid")+"'/>");
@@ -102,7 +104,7 @@ public class Inventory extends HttpServlet {
                 out2.println("<input type='hidden' name='coinName' value='"+ records.getString("name")+"'/>");
                 out2.println("<input type='hidden' name='coinDesc' value='"+records.getString("description")+"'/>");
                 out2.println("<input type='hidden' name='customerPrice' value='"+records.getString("price")+"'/>");
-                out2.println("<input type='hidden' name='qtyOrder' value='1'/>");
+                out2.println("<input type='hidden' name='qty' value='"+records.getString("qty_available")+"'/>");
                 
                 
                 
@@ -116,7 +118,6 @@ public class Inventory extends HttpServlet {
             out2.println("</form></div>");
            
         }
-        
         
         
         catch(Exception e) {e.printStackTrace();}
