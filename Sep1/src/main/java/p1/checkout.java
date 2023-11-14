@@ -63,7 +63,7 @@ public class checkout extends HttpServlet {
 			product_qty_string = product_qty_string + r.get_qty() + ",";
 		}
 
-		product_ID_string = product_ID_string.substring(0, product_qty_string.length() - 1);
+		product_ID_string = product_ID_string.substring(0, product_ID_string.length() - 1);
 		product_qty_string = product_qty_string.substring(0, product_qty_string.length() - 1);
 		
 		//ResultSet records=null;
