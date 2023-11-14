@@ -42,7 +42,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 	
 	try {
-		mycon2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","$Edg131854");
+		mycon2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","Iforgot#6");
 		String addData = "insert into products (pid, name, description, price, image, qty_available)" + "values (?, ?, ?, ?, ?, ?)";
 		String updateData = "update products set name=?, description=?, price=?, image=?, qty_available=? where pid=?";
 		
