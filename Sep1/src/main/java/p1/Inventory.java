@@ -41,7 +41,7 @@ public class Inventory extends HttpServlet {
         ResultSet records=null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","$Edg131854");
+            mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","Iforgot#6");
             sql_stmt = mycon.createStatement();  
             records = sql_stmt.executeQuery("select * from products");
             
