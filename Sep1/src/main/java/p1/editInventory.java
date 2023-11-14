@@ -42,9 +42,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 	
 	try {
-		mycon2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","Iforgot#6");
-		String addData = "insert into products (pid, name, description, price, image)" + "values (?, ?, ?, ?, ?)";
-		String updateData = "update products set name=?, description=?, price=?, image=? where pid=?";
+		mycon2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_list","root","$Edg131854");
+		String addData = "insert into products (pid, name, description, price, image, qty_available)" + "values (?, ?, ?, ?, ?, ?)";
+		String updateData = "update products set name=?, description=?, price=?, image=?, qty_available=? where pid=?";
 		
 		PreparedStatement addStmt = mycon2.prepareStatement(addData);
 		PreparedStatement deleteStmt = mycon2.prepareStatement("Delete From products where pid=?");
@@ -56,6 +56,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			addStmt.setString(3, String.valueOf(request.getParameter("coinDesc")));
 			addStmt.setFloat(4, Float.valueOf(request.getParameter("customerPrice")));
 			addStmt.setString(5, String.valueOf(request.getParameter("pic")));
+			addStmt.setInt(6, Integer.valueOf(request.getParameter("qty")));
+			
 			x=addStmt.executeUpdate();
 			
 			if(x>0) {
@@ -74,7 +76,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			updateStmt.setString(2, String.valueOf(request.getParameter("coinDesc")));
 			updateStmt.setFloat(3, Float.valueOf(request.getParameter("customerPrice")));
 			updateStmt.setString(4, String.valueOf(request.getParameter("pic")));
-			updateStmt.setInt(5, Integer.valueOf(request.getParameter("pid")));
+			updateStmt.setInt(5, Integer.valueOf(request.getParameter("qty")));
+			updateStmt.setInt(6, Integer.valueOf(request.getParameter("pid")));
 			x=updateStmt.executeUpdate();
 		
 			if(x>0) {
@@ -105,7 +108,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-}
 /**
 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 */
